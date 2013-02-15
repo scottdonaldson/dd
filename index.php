@@ -3,7 +3,6 @@
 	<div class="content clearfix">
     
 	<?php 
-		if (have_posts()) :
         while (have_posts()) : the_post(); ?>
 
 		<?php 
@@ -38,8 +37,8 @@
     <div class="loadmore">
 		<span class="newer"><?php previous_posts_link(''); ?></span>
 		<span class="older"><?php next_posts_link(''); ?> </span>
-    </div>    
-    
-    <?php endif; 
+    </div>
+
+    <div id="waiting"></div>  
 	
-get_footer(); ?>
+<?php get_footer(); ?>

@@ -25,9 +25,5 @@ get_header(); ?>
     </div>   
     
     <?php endif; ?>
-    
-    <span class="previous">&larr;</span>
-    <span class="next">&rarr;</span>    
-
 
 <?php get_footer(); ?>

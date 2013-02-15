@@ -1,22 +1,34 @@
-	</div><!-- #main -->
-    
-    <footer class="borderbox clearfix">
-        <p class="footer-contact">Daniel at DuGoff dot com</p>
-        <p class="footer-left">&copy; Daniel DuGoff <?php echo date('Y'); ?></p>
-        <p class="footer-right">Design + Code by <a href="http://parsleyandsprouts.com" target="_blank">Parsley &amp; Sprouts</a></p>
-        
-    </footer>
-    
-</div><!-- #container -->
+</div><!-- #main -->
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<?php if (is_single() && !is_singular('project') || is_page('5631')) { ?>
+    
+    <nav class="order">
+          
+        <div class="blognav">
+            <a class="prev1 arrow"></a>
+            <a class="next1 arrow"></a>
+        </div>
+
+        <a class="archive" href="<?php echo home_url(); ?>/?page_id=3345">archive view</a>
+          
+    </nav>
+
+<?php } ?>
+    
+<footer class="clearfix">
+    <p class="aligncenter">Daniel at DuGoff dot com</p>
+    <p class="alignleft">&copy; Daniel DuGoff <?php echo date('Y'); ?></p>
+    <p class="alignright">Design + Code by <a href="http://parsleyandsprouts.com" target="_blank">Parsley &amp; Sprouts</a></p>
+</footer>
+    
+</div><!-- #page -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-    <script src="<?php echo bloginfo('template_url'); ?>/js/jquery.mousewheel.min.js" type="text/javascript"></script>
-    <script src="<?php echo bloginfo('template_url'); ?>/js/jquery.easing.1.3.js" type="text/javascript"></script>
-    <script src="<?php echo bloginfo('template_url'); ?>/js/jquery.mCustomScrollbar.js" type="text/javascript"></script>
-	<script src="<?php echo bloginfo('template_url'); ?>/js/modernizr.js"></script>
-	<script src="<?php echo bloginfo('template_url'); ?>/js/dugoff.js"></script>
+    <script src="<?php echo bloginfo('template_url'); ?>/js/plugins.js"></script>
+	<script src="<?php echo bloginfo('template_url'); ?>/js/script.js"></script>
 
+<!--
+UNCOMMENT GOOGLE ANALYTICS ON RELAUNCH
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -31,6 +43,7 @@
   })();
 
 </script>
+-->
 
 <?php wp_footer(); ?>
 </body>
