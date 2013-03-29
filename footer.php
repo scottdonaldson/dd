@@ -27,9 +27,8 @@
     <script src="<?php echo bloginfo('template_url'); ?>/js/plugins.js"></script>
 	<script src="<?php echo bloginfo('template_url'); ?>/js/script.js"></script>
 
-<!--
-UNCOMMENT GOOGLE ANALYTICS ON RELAUNCH
-<script type="text/javascript">
+<?php if (!is_user_logged_in()) { ?>
+<script>
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-31945672-1']);
@@ -43,7 +42,7 @@ UNCOMMENT GOOGLE ANALYTICS ON RELAUNCH
   })();
 
 </script>
--->
+<?php } ?>
 
 <?php wp_footer(); ?>
 </body>

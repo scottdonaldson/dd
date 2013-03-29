@@ -35,4 +35,7 @@ jQuery(window).load(function(){
 	// hide loading graphic
 	$('#waiting').hide();
 
+	// NO NEWSLETTER
+	$('.newsletter').remove();
+
 });
