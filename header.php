@@ -10,6 +10,8 @@
     <title><?php wp_title(''); ?></title>
 	<meta http-equiv="content-type" content="<?php bloginfo('html_type') ?>; charset=<?php bloginfo('charset') ?>" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="google-site-verification" content="wlU9OqBjfQU2Y_7rEMOn3h1aKrRviS-UXd1ii4rEI2Q" />
 	
     <link rel="icon" type="image/png" href="<?php echo bloginfo('template_url'); ?>/images/favicon.ico" />
 
