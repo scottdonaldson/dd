@@ -25,8 +25,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
     <script src="<?php echo bloginfo('template_url'); ?>/js/plugins.js"></script>
-	<script src="<?php echo bloginfo('template_url'); ?>/js/script.js"></script>
+	  <script src="<?php echo bloginfo('template_url'); ?>/js/script.js"></script>
 
+    <?php if (is_home()) { ?>
+      <script src="<?php echo bloginfo('template_url'); ?>/js/blog.js"></script>
+    <?php } ?>
+  
 <?php if (!is_user_logged_in()) { ?>
 <script>
 

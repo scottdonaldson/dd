@@ -15,6 +15,7 @@
 			) { ?>
         
             <div <?php post_class('newer'); ?>>
+                <h3 class="hidden"><?php the_title(); ?></h3>
                 <a class="perm" href="<?php the_permalink(); ?>">
                     <?php the_content(); ?>
                 </a>
