@@ -2,7 +2,14 @@
 /*
 Template Name: Log (most recent post)
 */
-get_header();
+get_header(); ?>
+<style>
+    iframe {
+        display: block;
+        margin: 0 auto;
+    }
+</style>
+<?php
 
 query_posts('posts_per_page=1');
 while (have_posts()) : the_post(); 
