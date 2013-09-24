@@ -38,7 +38,7 @@
 	<h3 id="site-title"><a href="<?php echo home_url(); ?>" rel="home" title="Daniel DuGoff">Daniel DuGoff</a></h3>
 <?php } ?>
 
-    <div class="topnav">
+    <!-- <div class="topnav">
         <span><a href="<?php echo home_url(); ?>" rel="home" title="Daniel DuGoff">Work</a></span>
         <span><a href="<?php echo home_url(); ?>/?page_id=83">CV</a></span>
         <span>
@@ -48,7 +48,7 @@
         <a href="<?php the_permalink(); ?>">Log</a>
         <?php endwhile; wp_reset_query(); ?>
         </span>    
-    </div>
+    </div> -->
 
 </header>          
     
