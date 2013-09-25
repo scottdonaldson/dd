@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'Monoxil';
+    src: url('../fonts/Monoxil_Regular-webfont.eot');
+    src: url('../fonts/Monoxil_Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Monoxil_Regular-webfont.woff') format('woff'),
+         url('../fonts/Monoxil_Regular-webfont.ttf') format('truetype'),
+         url('../fonts/Monoxil_Regular-webfont.svg#MonoxilRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.login h1 a {
+	background:none transparent;
+	text-indent:0;
+	text-align:center;
+	color:#444;
+	text-decoration:none;
+	font-family: 'Monoxil',"Courier New", Courier, monospace;
+	font-weight:normal;
+	overflow:visible;
+	padding-bottom:0;
+}
+
+.login h1 a:hover {
+	color:#999;
+}

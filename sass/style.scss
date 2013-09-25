@@ -1,0 +1,833 @@
+// ----- imports
+@import 'compass';
+
+// ----- mixins
+@mixin tight {
+	margin: 0;
+	padding: 0;
+}
+@mixin transit {
+	@include transition(0.4s ease-in-out);
+}
+
+@font-face {
+    font-family: 'Monoxil';
+    src: url('../fonts/Monoxil_Regular-webfont.eot');
+    src: url('../fonts/Monoxil_Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Monoxil_Regular-webfont.woff') format('woff'),
+         url('../fonts/Monoxil_Regular-webfont.ttf') format('truetype'),
+         url('../fonts/Monoxil_Regular-webfont.svg#MonoxilRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+// ----- styles
+
+* { @include box-sizing(border-box); }
+
+html, body { height: 100%; }
+
+body {
+	color: #000;
+	font-family: 'Monoxil', 'Courier New', Courier, monospace;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	.lt-ie9 & {
+		min-width: 960px;
+		width: 100%;
+	}
+}
+
+::selection { background: #aaa; color: #fff; text-shadow: none; }
+::-moz-selection { background: #aaa; color: #fff; text-shadow: none; }
+
+a, a:visited { 
+	color: #000;
+	text-decoration: none;
+	
+	&:active,
+	&:hover {
+		color: #999;
+	}
+
+	header &,
+	#main &,
+	footer & {
+		// Include transition (exclude links in the admin bar)
+		@include transit; 
+	}
+}
+
+strong, b { font-weight: normal; } // Monoxil doesn't have a bold face
+
+// ----- header
+
+header {
+	padding-bottom: 3em;
+	text-align: center;
+	width: 100%;
+	@media screen and (max-width: 800px) {
+		padding-bottom: 2.2em;
+	}
+}
+
+#site-title {
+	font-size: 1.6em;
+	margin-top: 2em;
+	margin-bottom: 0.5em;
+	@media screen and (max-width: 800px) {
+		margin-top: 1em;
+	}
+}
+
+.topnav {
+	text-transform: uppercase;
+
+	span {
+		font-size: 0.9em;
+	}
+
+	a {
+		padding: 0.5em 1.5em;
+	}
+}
+
+// ----- page structure
+
+#page { height: 100%; position: relative; }
+
+#main {
+	margin: 0 10%;
+	position: relative;
+	width: 80%;
+
+	@media screen and (max-width: 800px) {
+		margin: 0 5%;
+		width: 90%;
+	}
+
+	& > .content {
+		position: absolute;
+		top: 0;
+		width: 100%;
+
+		@media screen and (max-width: 800px) {
+			position: relative;
+		}
+	}
+
+	.lt-ie9 & {
+		margin: 0 auto;
+		width: 960px;
+	}
+}
+
+.order {
+	float: left;
+	font-size: 0.9em;
+	text-align: right;
+	width: 15%;
+
+	.lt-ie9 & {
+		width: 200px;
+	}
+
+	@media screen and (max-width: 800px) {
+		float: none;
+		margin-bottom: 20px;
+		text-align: center;
+		width: 100%;
+	}
+}
+
+// ----- home
+
+.home {
+	#main {
+		margin: 0 15%;
+		padding: 0 30px;
+		width: 70%;
+		&:hover .unit {
+			@include opacity(0.5);
+			&:hover {
+				@include opacity(1);
+			}
+			&.faded:hover {
+				@include opacity(0.5);
+			}
+		}
+
+		@media screen and (max-width: 800px) {
+			padding: 0;
+		}
+
+		.lt-ie9 & {
+			margin: 0 auto;
+			width: 800px;
+		}
+	}
+
+	.order {
+		li {
+			cursor: pointer;
+			list-style-type: none;
+			margin-bottom: 0.4em;
+	
+			a {
+				padding: 0.3em;
+			}
+
+			a.sorted { // active menu item gets grey background
+				background: #eee;
+				&:active,
+				&:hover {
+					color: #000;
+				}
+			}
+		}
+		@media screen and (max-width: 800px) {
+			display: none;
+		}
+	}
+
+	.js & img {
+		@include opacity(0);
+	}
+}
+
+.cat-item-1, // don't show uncategorized
+.twenty {
+	display: none;
+
+	.sorted & {
+		display: inline;
+	}
+	a:active &,
+	a:hover & {
+		display: inline;
+	}
+}
+
+// At largest size, 5 units to a row
+.unit {
+	float: left;
+	margin: 0 3% 3% 0;
+	@include opacity(1);
+	position: relative;
+	text-align: center;
+	@include transit;
+	width: 17.6%;
+
+	&:nth-child(5n+1) {
+		clear: left;
+	}
+	&:nth-child(5n+5) {
+		margin-right: 0;
+	}
+	&.clear-right { // Some weird IE fixes
+		margin-right: 0;
+	}
+
+	img.ie-cover {
+		@include border-radius(0);
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100% !important;
+	}
+
+	// 4 to a row at 1200px
+	@media screen and (max-width: 1200px) {
+		margin: 0 4% 4% 0;
+		width: 22%;
+
+		&:nth-child(5n+1),
+		&:nth-child(5n+5) {
+			clear: none;
+			margin-right: 4%;
+		}
+
+		&:nth-child(4n+1) {
+			clear: left;
+		}
+
+		&:nth-child(4n+4) {
+			margin-right: 0;
+		}
+	}
+
+	// 3 to a row at 960px
+	@media screen and (max-width: 960px) {
+		margin: 0 5% 5% 0;
+		width: 30%;
+
+		&:nth-child(5n+1),
+		&:nth-child(5n+5),
+		&:nth-child(4n+1),
+		&:nth-child(4n+4) {
+			clear: none;
+			margin-right: 5%;
+		}
+
+		&:nth-child(3n+1) {
+			clear: left;
+		}
+
+		&:nth-child(3n+3) {
+			margin-right: 0;
+		}
+	}	
+	// 2 to a row at 600px
+	@media screen and (max-width: 600px) {
+		margin: 0 6% 6% 0;
+		width: 47%;
+
+		&:nth-child(5n+1),
+		&:nth-child(5n+5),
+		&:nth-child(4n+1),
+		&:nth-child(4n+4),
+		&:nth-child(3n+3),
+		&:nth-child(3n+1) {
+			clear: none;
+			margin-right: 6%;
+		}
+
+		&:nth-child(2n+1) {
+			clear: left;
+		}
+
+		&:nth-child(2n+2) {
+			margin-right: 0;
+		}
+	}	
+
+	img {
+		@include border-radius(500px);
+		display: block;
+		height: auto;
+		width: 100%;
+		.lt-ie9 & {
+			width: 99%;
+		}
+	}
+
+	.title {
+		color: #000;
+		font-size: 1em;
+		height: 100px;
+		margin: 0 0 -100px;
+		@include opacity(0);
+		position: relative;
+		@include transit;
+		
+		span {
+			background: #fff;
+			background: transparentize(#fff, 0.2);
+			line-height: 1.8em;
+			padding: 0.2em;
+		}
+
+		.touch & {
+			height: auto;
+			opacity: 1 !important;
+			margin: 10px 0 0;
+			top: 0 !important;
+		}
+
+		.preload & { display: none !important; }
+	}
+	&:hover .title { // show title when hover over unit
+		@include opacity(1); 
+	} 
+}
+
+.faded {
+	@include opacity(0.5);
+	z-index: 0;
+	&:hover .title {
+		@include opacity(0);
+	}
+}
+
+// ----- single projects
+
+.single-content {
+	float: left;
+	overflow: hidden;
+	padding-right: 5%;
+	width: 30%;
+
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+
+	@media screen and (max-width: 800px) {
+		float: none;
+		height: auto !important;
+		padding-bottom: 1em;
+		width: 100%;
+
+		.arrow {
+			display: none !important;
+		}
+	}
+}
+
+.container { position: relative; } // relative for the scrollbars... see below
+.scroll { position: relative; top: 0; }
+.noscrolling .scroll { top: 0 !important; }
+
+.entry-title {
+	font-size: 16px;
+	margin: 0;
+}
+
+.single-gallery {
+	float: left;
+	position: relative;
+	width: 70%;
+
+	@media screen and (max-width: 800px) {
+		float: none;
+		height: auto !important;
+		width: 100%;
+	}
+
+	img {
+		display: none;
+		height: auto;
+		width: auto;
+		left: 0;
+		max-height: 100%;
+		max-width: 100%;
+		position: absolute;
+		top: 0;
+
+		@media screen and (max-width: 800px) {
+			display: block !important;
+			height: auto !important;
+			left: 0 !important;
+			margin: 0 auto 30px;
+			opacity: 1 !important;
+			position: relative;
+			top: 0 !important;
+			width: auto !important;
+
+			&.final {
+				margin-bottom: 15px;
+			}
+
+			.preload & { display: none !important; } // yikes that's a lot of importants
+		}
+	}
+
+	#left,
+	#right {
+		cursor: url(../images/prev.png), pointer;
+		float: left;
+		height: 100%;
+		position: absolute;
+		width: 50%;
+		@media screen and (max-width: 800px) {
+			display: none;
+		}
+
+		.lt-ie10 & {
+			display: none;
+		}
+	}
+
+	#right { 
+		cursor: url(../images/next.png), pointer;
+		left: 50%;
+	}
+}
+
+.arrow { 
+	background: url(../images/prev.svg) center center no-repeat transparent;
+	cursor: pointer;
+	display: none;
+	margin-bottom: -10px;
+	padding: 20px;
+	position: relative;
+
+	.touch &,
+	.lt-ie10 & { 
+		display: inline-block; 
+		background: url(../images/prev.png) center center no-repeat transparent;
+		left: -10px;
+		@media screen and (max-width: 800px) { left: 0; }
+	}
+
+	&.next1 { 
+		background: url(../images/next.svg) center center no-repeat transparent; 
+		margin-right: 0; 
+		.lt-ie10 & {
+			background: url(../images/next.png) center center no-repeat transparent;
+		}
+	}
+
+	&:active,
+	&:hover {
+		@include opacity(0.6);
+	}
+}
+
+#waiting {
+	background: url(../images/loading1.gif) center center no-repeat;
+    height: 50px;
+    left: 40%;
+    margin: 0 auto;
+    position: fixed;
+    top: 40%;
+    width: 20%;
+
+    .single-project & {
+    	@media screen and (max-width: 800px) {
+	    	display: none;
+		}
+    }
+
+    @media screen and (max-width: 800px) {
+    	position: absolute;
+    }
+}
+
+#arrowkeys {
+	bottom: 35px;
+	right: 35px;
+	position: fixed;
+
+	.touch & {
+		display: none;
+	}
+	@media screen and (max-width: 800px) {
+		display: none;
+	}
+}
+
+// ----- custom scrollbars
+
+.scroll_container {
+	background: #666;
+	display: none;
+	position: absolute;
+	right: -20px;
+	top: 0;
+	width: 6px;
+	.noscrolling & { display: none !important; }
+}
+
+.scrollbar {
+	background: #999;
+	cursor: pointer;
+	height: 60px;
+	position: relative;
+	top: 0;
+	width: 6px;
+	.noscrolling & { display: none !important; }
+}
+
+// ----- cv
+
+.page-template-page-cv-php {
+
+	ul {
+		list-style: none;
+		margin: 0 0 23px;
+		padding: 0;
+		
+		& > li {
+			cursor: pointer;
+			padding: 6px 0;
+			position: relative;
+			width: 60%;
+		}
+
+		ul {
+			color: #999;
+			left: 105%;
+			position: absolute;
+			top: 0;
+			width: 66%;
+
+			& > li {
+				position: absolute;
+				top: 0;
+				width: 100%;
+			}
+		}
+
+		// On small and touch screens,
+		// show all info by default
+		@media screen and (max-width: 600px) {
+			& > li {
+				width: 100%;
+			}
+
+			ul {
+				left: 0;
+				margin: 1em 0 0;
+				padding-left: 40px;
+				position: relative;
+				width: 100%;
+
+				& > li {
+					position: relative;
+				}
+			}
+		}
+
+		.touch & {
+			& > li {
+				width: 100%;
+			}
+
+			ul {
+				left: 0;
+				margin: 1em 0 0;
+				padding-left: 40px;
+				position: relative;
+				width: 100%;
+
+				& > li {
+					position: relative;
+				}
+			}
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	#main {
+		margin-bottom: 30px;
+		p {
+			margin: 0 0 22px;
+		}
+	} 
+}
+
+.blocker {
+	background: #fff;
+	width: 100%;
+	height: 100px;
+	position: absolute;
+	top: 0;
+	z-index: 2;
+	@media screen and (max-width: 600px) {
+		display: none;		
+	}
+}
+
+// ----- blog individual
+
+.page-template-page-log-php,
+.single-post {
+	#main {
+		padding: 0 30px;
+		margin: 0 15%;
+		width: 70%;
+		@media screen and (max-width: 800px) {
+			margin: 0 10%;
+			padding: 0;
+			width: 80%;
+		}
+		@media screen and (max-width: 400px) {
+			margin: 0 5%;
+			width: 90%;
+		}
+	}
+	.entry-title { 
+		font-size: 12px; 
+	}
+
+	.single-gallery {
+		overflow: hidden;
+		width: 100%;
+
+		.entry-title, .wp-caption-text { display: none; } // don't show captions until append 
+		strong { display: none; } 						  // to .order (in js)
+		img { 
+			display: none;
+			margin: 0 auto;
+			max-width: 600px;
+			@media screen and (max-width: 1000px) {
+				max-width: 100%;
+			}
+			@media screen and (max-width: 800px) {
+				left: 0 !important;
+				margin: 0 auto;
+				position: relative;
+				top: 0 !important;
+				width: 100%;
+			}
+		}
+	}
+
+	.order { 
+		display: none; // fade in with the js
+		@include hyphens(auto);
+		padding-left: 30px;
+		position: absolute;
+		top: 130px;
+		@include word-break(break-all);
+		.archive {
+			display: block;
+			margin-top: 12px;
+			.lt-ie10 &,
+			.touch & { margin-top: 0; }
+			@media screen and (max-width: 800px) {
+				margin-top: 0;
+			}
+		}
+
+		@media screen and (max-width: 800px) {
+			margin-top: 30px;
+			padding-left: 0;
+			position: relative;
+			top: 0;
+		}
+	} 
+}
+.blognav {
+	.arrow {
+		left: 10px;
+		margin-bottom: 0;
+		@media screen and (max-width: 800px) {
+			display: inline-block !important;
+			left: 0;
+		}
+	}
+}
+
+.single {
+	iframe {
+		display: block;
+		margin: 0 auto;
+	}
+}
+
+// ----- blog archive
+
+.blog {
+
+	.lt-ie9 & { #main { left: 30px; } }
+
+	h2, .newer strong { display: none; }
+
+	.post {
+		float: left;
+		margin: 0 4% 4% 0;
+		width: 22%;
+
+		&:nth-child(4n+4) {
+			margin-right: 0;
+		}
+
+		&:nth-child(4n+1) {
+			clear: left;
+		}
+
+		a {
+			display: block;
+			position: relative;
+		}
+
+		.lt-ie9 & {
+			margin: 0 30px 30px 0;
+			width: 200px;
+		}
+
+		@media screen and (max-width: 1100px) {
+			width: 30.667%;
+
+			&:nth-child(4n+1),
+			&:nth-child(4n+4) {
+				clear: none;
+				margin-right: 4%;
+			}
+
+			&:nth-child(3n+3) {
+				margin-right: 0;
+			}
+
+			&:nth-child(3n+1) {
+				clear: left;
+			}
+		}
+
+		@media screen and (max-width: 800px) {
+			width: 48%;
+
+			&:nth-child(4n+1),
+			&:nth-child(4n+4),
+			&:nth-child(3n+1),
+			&:nth-child(3n+3) {
+				clear: none;
+				margin-right: 4%;
+			}
+
+			&:nth-child(2n+1) {
+				clear: left;
+			}
+
+			&:nth-child(2n+2) {
+				margin-right: 0;
+			}
+		}
+	}
+
+	.wp-caption {
+		width: 100% !important;
+	}
+
+	#main p { margin: 0; }
+
+	img {
+		display: block;
+		margin: 0;
+		max-width: 100% !important;
+		opacity: 0;
+		@include transition;
+	}
+}
+
+// ----- footer
+
+footer {
+	background: #fff;
+	bottom: 0;
+	font-size: 0.75em;
+	height: 36px;
+	padding: 12px 17%;
+	position: fixed;
+	width: 100%;
+	z-index: 10; // over the blockers
+	.preload & { display: none; }
+	p {
+		position: relative;
+		top: -16px;
+		&.aligncenter {
+			top: 0;
+			@media screen and (max-width: 800px) { display: none; }
+		}
+	}
+
+	@media screen and (max-width: 960px) {
+		padding: 12px 5%;
+	}
+
+	@media screen and (max-width: 800px) {
+		position: relative;
+		p { top: 0; }
+	}
+
+	@media screen and (max-width: 400px) {
+		height: 56px;
+		.alignright { clear: left; float: left; margin-left: 0; }
+	}
+}

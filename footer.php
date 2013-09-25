@@ -9,7 +9,7 @@
             <a class="next1 arrow"></a>
         </div>
 
-        <a class="archive" href="<?php echo home_url(); ?>/?page_id=3345">archive view</a>
+        <a class="archive" href="<?php echo home_url(); ?>">archive view</a>
           
     </nav>
 
